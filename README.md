@@ -1,235 +1,219 @@
-# EcoWaste - Sustainable Waste Management Website
+# ♻️ Waste Management Website
 
-A modern, responsive waste management platform built with Next.js 15 that connects waste sellers with buyers to create a sustainable circular economy.
+A web-based platform designed to connect waste sellers with potential buyers and promote recycling, reuse, and sustainable waste management. Users can register as buyers or sellers, and sellers can create waste listings with details such as material type, weight, price, location, and contact information.
 
-## 🌟 Features
+## 📌 Project Overview
 
-### 🏠 Landing Page
-- **User Type Selection**: Choose between Seller and Buyer roles
-- **Responsive Design**: Mobile-first approach with beautiful UI
-- **Hero Section**: Compelling messaging about sustainability
-- **Features Overview**: Highlight key benefits of the platform
+The Waste Management Website aims to simplify the process of finding and trading recyclable waste materials through a centralized digital platform. It helps sellers showcase available waste materials and enables buyers to discover materials that may be suitable for reuse or recycling.
 
-### 👤 Seller Features
-- **Secure Login**: Protected seller dashboard access
-- **Waste Listing Management**: Add, view, and manage waste materials
-- **Weight Input**: Specify waste weight in kg, lbs, or tons
-- **Pricing Control**: Set competitive prices per unit
-- **Location Management**: Specify pickup/delivery locations
-- **Status Tracking**: Monitor listing status (active, sold, pending)
-- **Dashboard Analytics**: View total listings, active listings, and total value
+## 🎯 Objectives
 
-### 🛒 Buyer Features
-- **Secure Login**: Protected buyer dashboard access
-- **Advanced Search**: Find waste materials by type, location, and keywords
-- **Filtering System**: Narrow down results by material type and location
-- **Material Browsing**: View detailed information about available waste
-- **Favorites System**: Save interesting materials for later
-- **Purchase Interface**: Easy-to-use buying process
+- Encourage recycling and responsible waste management.
+- Connect waste sellers with potential buyers.
+- Provide a structured system for waste material listings.
+- Store user profiles and waste listing information securely.
+- Track listing availability and status.
+- Support sustainable resource utilization.
 
-### 🎨 Design & UX
-- **Modern UI**: Clean, professional design with Tailwind CSS
-- **Responsive Layout**: Works perfectly on all device sizes
-- **Interactive Elements**: Smooth animations and transitions
-- **Accessibility**: WCAG compliant design patterns
-- **Icon Integration**: Lucide React icons for better visual communication
+## ✨ Features
 
-## 🚀 Technology Stack
+- **User Registration:** Store user details, contact information, and address.
+- **Role-Based Users:** Support BUYER and SELLER roles.
+- **Waste Listings:** Store waste type, weight, unit, price, and description.
+- **Location Details:** Maintain listing locations and addresses.
+- **Seller Information:** Associate each waste listing with its seller.
+- **Listing Status:** Manage listings using ACTIVE, SOLD, and PENDING statuses.
+- **Database Indexing:** Improve lookup efficiency for seller and listing status queries.
+- **Persistent Storage:** Use SQLite for local database storage.
 
-- **Framework**: Next.js 15 (App Router)
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS
-- **Icons**: Lucide React
-- **State Management**: React Hooks
-- **Authentication**: Local Storage (Demo)
-- **Responsive Design**: Mobile-first approach
+## 🛠️ Tech Stack
 
-## 📁 Project Structure
+| Technology | Purpose |
+|---|---|
+| Next.js | Web application framework |
+| React | User interface |
+| TypeScript / JavaScript | Application development |
+| Prisma ORM | Database access and schema management |
+| SQLite | Relational database |
+| Tailwind CSS | UI styling, if configured |
+| Node.js | Runtime environment |
+| Git and GitHub | Version control and collaboration |
 
-```
-src/
-├── app/
-│   ├── globals.css          # Global styles and Tailwind imports
-│   ├── layout.tsx           # Root layout component
-│   ├── page.tsx             # Home page with user selection
-│   ├── about/
-│   │   └── page.tsx         # About page
-│   ├── contact/
-│   │   └── page.tsx         # Contact page with form
-│   ├── seller/
-│   │   ├── login/
-│   │   │   └── page.tsx     # Seller login page
-│   │   └── dashboard/
-│   │       └── page.tsx     # Seller dashboard
-│   └── buyer/
-│       ├── login/
-│       │   └── page.tsx     # Buyer login page
-│       └── dashboard/
-│           └── page.tsx     # Buyer dashboard
-├── components/               # Reusable components (future)
-└── types/                   # TypeScript type definitions (future)
-```
+## 🗄️ Database Design
 
-## 🛠️ Installation & Setup
+The application uses Prisma ORM with an SQLite database.
+
+### 1. User Model
+
+Stores registered user information.
+
+| Field | Description |
+|---|---|
+| `id` | Unique user identifier |
+| `email` | Unique email address |
+| `password` | Stored password value |
+| `firstName` | User's first name |
+| `lastName` | User's last name |
+| `phone` | Contact number |
+| `role` | BUYER or SELLER |
+| `company` | Optional company name |
+| `businessType` | Optional business category |
+| `address` | Street or postal address |
+| `city` | City |
+| `state` | State |
+| `zipCode` | Postal code |
+| `createdAt` | Account creation timestamp |
+| `updatedAt` | Last update timestamp |
+
+### 2. WasteListing Model
+
+Stores information about waste materials available on the platform.
+
+| Field | Description |
+|---|---|
+| `id` | Unique listing identifier |
+| `type` | Type of waste material |
+| `weight` | Weight of the material |
+| `unit` | Unit of measurement |
+| `price` | Listed price |
+| `location` | Listing location |
+| `address` | Listing address |
+| `contactNumber` | Contact number for the listing |
+| `description` | Details about the material |
+| `status` | ACTIVE, SOLD, or PENDING |
+| `createdAt` | Listing creation timestamp |
+| `sellerId` | Identifier of the seller |
+
+### 3. Relationships
+
+- One seller can create multiple waste listings.
+- Each waste listing belongs to one seller.
+- Each user has a unique email address.
+- Listing status defaults to `ACTIVE`.
+- User IDs and listing IDs are generated using Prisma's `cuid()` function.
+
+## 🏗️ System Architecture
+
+The application follows a web application architecture:
+
+1. **Frontend:** Provides the user interface for interacting with the platform.
+2. **Application Layer:** Handles application logic and database operations.
+3. **Prisma ORM:** Connects application code to the database.
+4. **SQLite Database:** Stores users and waste listings.
+
+## ⚙️ Installation and Setup
 
 ### Prerequisites
-- Node.js 18+ 
-- npm or yarn
 
-### 1. Clone the Repository
+- Node.js and npm
+- Git
+- Visual Studio Code (recommended)
+
+### Step 1: Clone the Repository
+
 ```bash
-git clone <repository-url>
-cd waste-management-website
+git clone <YOUR_GITHUB_REPOSITORY_URL>
 ```
 
-### 2. Install Dependencies
+### Step 2: Navigate to the Project Folder
+
+```bash
+cd "waste management website"
+```
+
+Adjust the folder name if your local project uses a different name.
+
+### Step 3: Install Dependencies
+
 ```bash
 npm install
 ```
 
-### 3. Run Development Server
+### Step 4: Configure Environment Variables
+
+Create or update the `.env` file in the project root:
+
+```env
+DATABASE_URL="file:./dev.db"
+```
+
+Use the database URL appropriate for your existing Prisma setup. Do not upload secrets or sensitive credentials to GitHub.
+
+### Step 5: Generate Prisma Client
+
+```bash
+npx prisma generate
+```
+
+### Step 6: Synchronize the Database
+
+If you use Prisma Migrate:
+
+```bash
+npx prisma migrate dev --name init
+```
+
+Alternatively, if your project uses schema synchronization without migrations:
+
+```bash
+npx prisma db push
+```
+
+Use the method that matches your existing database setup.
+
+### Step 7: Start the Development Server
+
 ```bash
 npm run dev
 ```
 
-### 4. Open Browser
-Navigate to [http://localhost:3000](http://loca
-lhost:3000)
+Open the local URL shown in your terminal, usually:
 
-## 🔐 Demo Credentials
+`http://localhost:3000`
 
-### Seller Account
-- **Email**: seller@example.com
-- **Password**: password
+## 📂 Project Structure
 
-### Buyer Account
-- **Email**: buyer@example.com
-- **Password**: password
-
-## 📱 Responsive Design
-
-The website is fully responsive and optimized for:
-- **Mobile**: 320px - 768px
-- **Tablet**: 768px - 1024px
-- **Desktop**: 1024px+
-
-## 🎯 Key Features Explained
-
-### Weight Input System
-Sellers can input waste weight using:
-- **Units**: kg, lbs, tons
-- **Precision**: Decimal values supported
-- **Validation**: Required field with number input
-
-### Dashboard Analytics
-- **Total Listings**: Count of all waste materials
-- **Active Listings**: Currently available materials
-- **Total Value**: Combined value of all listings
-- **Monthly Stats**: New listings added this month
-
-### Search & Filter System
-Buyers can:
-- **Search**: By material type, description, or seller
-- **Filter**: By material type and location
-- **Sort**: Results by relevance and date
-- **Save**: Favorite materials for quick access
-
-## 🚧 Future Enhancements
-
-- [ ] User registration system
-- [ ] Real-time chat between buyers and sellers
-- [ ] Payment gateway integration
-- [ ] Mobile app development
-- [ ] Advanced analytics and reporting
-- [ ] Multi-language support
-- [ ] Push notifications
-- [ ] Image upload for waste materials
-- [ ] GPS location services
-- [ ] Waste quality verification system
-
-## 🎨 Customization
-
-### Colors
-The website uses a custom color palette defined in `tailwind.config.js`:
-- **Primary**: Green shades for sustainability theme
-- **Secondary**: Gray shades for professional look
-- **Accent**: Various colors for different UI elements
-
-### Styling
-- **Components**: Pre-built component classes in `globals.css`
-- **Responsiveness**: Mobile-first CSS approach
-- **Animations**: Smooth transitions and hover effects
-
-## 📊 Performance Features
-
-- **Code Splitting**: Automatic route-based code splitting
-- **Image Optimization**: Next.js built-in image optimization
-- **CSS Optimization**: Tailwind CSS purging for production
-- **Lazy Loading**: Components load as needed
-
-## 🔒 Security Features
-
-- **Route Protection**: Protected dashboard routes
-- **Input Validation**: Form validation and sanitization
-- **Authentication**: Session management (demo implementation)
-
-## 🧪 Testing
-
-To run tests (when implemented):
-```bash
-npm run test
+```text
+waste-management-website/
+├── prisma/
+│   ├── schema.prisma
+│   └── dev.db
+├── src/
+│   └── app/
+├── public/
+├── .env
+├── .gitignore
+├── package.json
+├── package-lock.json
+├── README.md
+├── next.config.js
+├── tailwind.config.js
+├── netlify.toml
+└── vercel.json
 ```
 
-## 📦 Build for Production
+The exact folders and configuration files may differ based on your implementation.
 
-```bash
-npm run build
-npm start
-```
+## 🔐 Security Considerations
 
-## 🌍 Environment Variables
+- Passwords should be hashed before being stored in the database.
+- Authentication and authorization should be implemented to protect user accounts and listings.
+- Environment files containing secrets should be excluded from version control.
+- Server-side validation should be used for user input and listing data.
+- Only authorized users should be allowed to modify or delete their own listings.
 
-Create a `.env.local` file for environment-specific configurations:
-```env
-NEXT_PUBLIC_API_URL=your_api_url
-NEXT_PUBLIC_APP_NAME=EcoWaste
-```
+## 🚀 Future Enhancements
 
-## 📈 Analytics & Monitoring
+- Search and filter waste listings by category and location.
+- Add buyer and seller dashboards.
+- Implement secure authentication and authorization.
+- Add images for listed waste materials.
+- Integrate online payments.
+- Add notifications for listing updates.
+- Introduce an administrator dashboard.
+- Provide analytics and reports on recycling activity.
+- Add map-based discovery of nearby listings.
 
-The platform is ready for integration with:
-- Google Analytics
-- Sentry for error tracking
-- Performance monitoring tools
+## 🌍 Expected Impact
 
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## 📞 Support
-
-For support and questions:
-- **Email**: support@ecowaste.com
-- **Documentation**: [docs.ecowaste.com](https://docs.ecowaste.com)
-- **Issues**: GitHub Issues page
-
-## 🙏 Acknowledgments
-
-- Next.js team for the amazing framework
-- Tailwind CSS for the utility-first CSS framework
-- Lucide for the beautiful icon set
-- The open-source community for inspiration
-
----
-
-**EcoWaste** - Building a sustainable future through smart waste management 🌱♻️
-
-
+The project aims to improve access to recyclable materials, support waste recovery, encourage reuse, and contribute to more sustainable waste
