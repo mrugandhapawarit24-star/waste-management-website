@@ -31,3 +31,14 @@ yarn-error.log*
 # TypeScript
 *.tsbuildinfo
 next-env.d.ts
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Generated files
+/generated/
+
+# Local SQLite database
+/prisma/*.db
+/prisma/*.db-journal
